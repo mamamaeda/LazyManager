@@ -19,6 +19,9 @@ struct ContentView: View {
                         .accessibilityIdentifier("taskNameTextField")
                     
                     Button("Create") {
+                        if self.taskName == "" {
+                            return
+                        }
                         self.tasks.append(self.taskName)
                         self.taskName = ""
                     }
