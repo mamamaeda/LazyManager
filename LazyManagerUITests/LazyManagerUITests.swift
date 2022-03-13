@@ -26,7 +26,14 @@ class when_user_types_task_name_and_press_add_button: XCTestCase {
         XCTAssertEqual(1, taskCount)
     }
     
-    // test_should_clear_task_name_field
+    func test_should_clear_task_name_field() {
+        let taskNameField = self.app.textFields["taskNameTextField"]
+        taskNameField.tap()
+        taskNameField.typeText("Wash the car \n")
+        let addTaskButton = self.app.buttons["addTaskButton"]
+        addTaskButton.tap()
+        XCTAssertEqual("Enter new task", taskNameField.value as! String)
+    }
     // test_should_not_add_task_when_task_name_is_blank
     
     

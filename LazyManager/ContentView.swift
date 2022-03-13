@@ -20,6 +20,7 @@ struct ContentView: View {
                     
                     Button("Create") {
                         self.tasks.append(self.taskName)
+                        self.taskName = ""
                     }
                     .accessibilityIdentifier("addTaskButton")
                 }
