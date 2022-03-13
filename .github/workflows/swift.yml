@@ -16,6 +16,6 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Build
-      run: set -o pipefail && xcodebuild clean -scheme "LazyManager-Package" -destination "platform=iOS Simulator,name=$DEVICE" build-for-testing | xcpretty --color --simple
+      run: set -o pipefail && xcodebuild clean -scheme "LazyManager" -destination "platform=iOS Simulator,name=$DEVICE" build-for-testing | xcpretty --color --simple
     - name: Run tests
-      run: set -o pipefail && xcodebuild test-without-building -scheme "LazyManagerPackageTests" -xctestrun $(find . -type f -name "*.xctestrun") -destination "platform=iOS Simulator,name=$DEVICE" -enableCodeCoverage YES | xcpretty --color --simple
+      run: set -o pipefail && xcodebuild test-without-building -scheme "LazyManager" -xctestrun $(find . -type f -name "*.xctestrun") -destination "platform=iOS Simulator,name=$DEVICE" -enableCodeCoverage YES | xcpretty --color --simple
