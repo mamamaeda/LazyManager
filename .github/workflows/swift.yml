@@ -9,11 +9,15 @@ on:
 jobs:
   build:
 
+    env:
+      SCHEME: "Actions"
+      DEVICE: "iPhone 11"
+      DERIVED_DATA_PATH: "DerivedData"
     runs-on: macos-latest
 
     steps:
     - uses: actions/checkout@v2
     - name: Build
-      run: swift build -v
+      run: set -o pipefail && xcodebuild clean -scheme $SCHEME -destination "platform=iOS Simulator,name=$DEVICE" -derivedDataPath $DERIVED_DATA_PATH build-for-testing | xcpretty --color --simple
     - name: Run tests
-      run: swift test -v
+      run: set -o pipefail && xcodebuild test-without-building -xctestrun $(find . -type f -name "*.xctestrun") -destination "platform=iOS Simulator,name=$DEVICE" -enableCodeCoverage YES | xcpretty --color --simple
